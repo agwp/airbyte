@@ -1,5 +1,5 @@
 #
-# Copyright (c) 2022 Airbyte, Inc., all rights reserved.
+# Copyright (c) 2023 Airbyte, Inc., all rights reserved.
 #
 
 
@@ -9,6 +9,7 @@ from pathlib import Path
 
 import pendulum
 import pytest
+
 from airbyte_cdk.models import ConfiguredAirbyteCatalog
 from airbyte_cdk.sources.streams.http.auth import NoAuth
 

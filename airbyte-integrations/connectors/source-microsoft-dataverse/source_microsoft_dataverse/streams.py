@@ -1,5 +1,5 @@
 #
-# Copyright (c) 2022 Airbyte, Inc., all rights reserved.
+# Copyright (c) 2023 Airbyte, Inc., all rights reserved.
 #
 
 from abc import ABC
@@ -8,13 +8,13 @@ from typing import Any, Iterable, Mapping, MutableMapping, Optional
 from urllib import parse
 
 import requests
+
 from airbyte_cdk.sources.streams import IncrementalMixin
 from airbyte_cdk.sources.streams.http import HttpStream
 
 
 # Basic full refresh stream
 class MicrosoftDataverseStream(HttpStream, ABC):
-
     # Base url will be set by init(), using information provided by the user through config input
     url_base = ""
     primary_key = ""
@@ -97,7 +97,6 @@ class MicrosoftDataverseStream(HttpStream, ABC):
 
 # Basic incremental stream
 class IncrementalMicrosoftDataverseStream(MicrosoftDataverseStream, IncrementalMixin, ABC):
-
     delta_token_field = "$deltatoken"
     state_checkpoint_interval = None  # For now we just use the change tracking as state, and it is only emitted on last page
 
@@ -143,7 +142,9 @@ class IncrementalMicrosoftDataverseStream(MicrosoftDataverseStream, IncrementalM
                 result.pop("@odata.context", None)
                 result.pop("id", None)
                 result.pop("reason", None)
-                result.update({"_ab_cdc_deleted_at": datetime.now().isoformat()})
+                now = datetime.now().isoformat()
+                result.update({self.cursor_field[0]: now})
+                result.update({"_ab_cdc_deleted_at": now})
             else:
                 result.update({"_ab_cdc_updated_at": result[self.cursor_field[0]]})
 

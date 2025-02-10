@@ -1,5 +1,5 @@
 #
-# Copyright (c) 2022 Airbyte, Inc., all rights reserved.
+# Copyright (c) 2023 Airbyte, Inc., all rights reserved.
 #
 
 import random
@@ -7,6 +7,10 @@ import string
 from json import load
 from typing import Dict, Generator
 from unittest.mock import MagicMock
+
+from firebolt.db import Connection
+from pytest import fixture
+from source_firebolt.source import SourceFirebolt, establish_connection
 
 from airbyte_cdk.models import Status
 from airbyte_cdk.models.airbyte_protocol import (
@@ -16,9 +20,6 @@ from airbyte_cdk.models.airbyte_protocol import (
     DestinationSyncMode,
     SyncMode,
 )
-from firebolt.db import Connection
-from pytest import fixture
-from source_firebolt.source import SourceFirebolt, establish_connection
 
 
 @fixture(scope="module")
@@ -58,14 +59,15 @@ def table_schema() -> str:
             "column3": {"type": ["null", "string"], "format": "date"},
             "column4": {
                 "type": ["null", "string"],
-                "format": "datetime",
+                "format": "date-time",
                 "airbyte_type": "timestamp_without_timezone",
             },
             # If column check fails you mignt not have the latest Firebolt version
             # with Decimal data type enabled
-            "column5": {"type": ["null", "string"], "airbyte_type": "big_number"},
+            # Removed as part of PR 25965 because... it just didn't work?
+            "column5": {"type": ["null", "string"]},
             "column6": {"type": "array", "items": {"type": ["null", "integer"]}},
-            "column7": {"type": ["null", "integer"]},
+            "column7": {"type": ["null", "boolean"]},
         },
     }
     return schema
