@@ -1,12 +1,13 @@
 #
-# Copyright (c) 2022 Airbyte, Inc., all rights reserved.
+# Copyright (c) 2023 Airbyte, Inc., all rights reserved.
 #
 
 import logging
 
 import pytest
-from airbyte_cdk.models import ConfiguredAirbyteCatalog, Type
 from source_hubspot.source import SourceHubspot
+
+from airbyte_cdk.models import ConfiguredAirbyteCatalog, Type
 
 
 @pytest.fixture

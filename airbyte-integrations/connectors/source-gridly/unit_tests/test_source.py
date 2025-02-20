@@ -1,10 +1,11 @@
 #
-# Copyright (c) 2022 Airbyte, Inc., all rights reserved.
+# Copyright (c) 2023 Airbyte, Inc., all rights reserved.
 #
 
 from unittest.mock import MagicMock
 
 from source_gridly.source import SourceGridly
+
 
 CONFIG = {"api_key": "IbuIBdkFjrJps6", "grid_id": "4539o52kmdjmzwp"}
 

@@ -1,10 +1,10 @@
-# See [Source Acceptance Tests](https://docs.airbyte.com/connector-development/testing-connectors/source-acceptance-tests-reference)
+# See [Connector Acceptance Tests](https://docs.airbyte.com/connector-development/testing-connectors/connector-acceptance-tests-reference)
 # for more information about how to configure these tests
 connector_image: airbyte/source-coingecko-coins:dev
 acceptance_tests:
   spec:
     tests:
-      - spec_path: "source_coingecko_coins/spec.yaml"
+      - spec_path: "manifest.yaml"
   connection:
     tests:
       - config_path: "secrets/config.json"
@@ -22,7 +22,8 @@ acceptance_tests:
   full_refresh:
     tests:
       - config_path: "secrets/config.json"
-        configured_catalog_path: "integration_tests/configured_catalog.json"
-        # we ignore actively changing array with numbers to pass the `test two sequential reads`
+        configured_catalog_path:
+          "integration_tests/configured_catalog.json"
+          # we ignore actively changing array with numbers to pass the `test two sequential reads`
         ignored_fields:
           market_chart: ["prices", "market_caps", "total_volumes"]

@@ -1,5 +1,5 @@
 #
-# Copyright (c) 2022 Airbyte, Inc., all rights reserved.
+# Copyright (c) 2023 Airbyte, Inc., all rights reserved.
 #
 
 import logging
@@ -7,6 +7,7 @@ from typing import Any, Mapping
 from urllib import parse
 
 from airbyte_cdk.sources.streams.http.requests_native_auth import Oauth2Authenticator
+
 
 logger = logging.getLogger("airbyte")
 
