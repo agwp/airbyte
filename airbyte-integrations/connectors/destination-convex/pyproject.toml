@@ -23,7 +23,7 @@ airbyte-cdk = "^6.0.0"
 destination-convex = "destination_convex.run:run"
 
 [tool.poetry.group.dev.dependencies]
-pytest = "^8.3.2"
+pytest = ">=8.3.2,<10.0.0"
 responses = "^0.13.3"
 
 
