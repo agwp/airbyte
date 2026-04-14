@@ -20,7 +20,7 @@ pyjwt = "2.8.0"
 
 [tool.poetry.group.dev.dependencies]
 requests-mock = "^1.10.0"
-pytest = "^8"
+pytest = ">=8,<10"
 
 [build-system]
 requires = ["poetry-core"]
